@@ -13,7 +13,7 @@ spring:
     active: "local"
   data:
     mongodb:
-      uri: "mongodb://localhost:27017/test"
+      uri: ${uridb}
 management:
   endpoints:
     web:

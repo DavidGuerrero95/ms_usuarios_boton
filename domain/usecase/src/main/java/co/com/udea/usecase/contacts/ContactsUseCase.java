@@ -3,13 +3,12 @@ package co.com.udea.usecase.contacts;
 import co.com.udea.model.contacts.Contacts;
 import co.com.udea.model.contacts.gateways.ContactsRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.java.Log;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 @RequiredArgsConstructor
-@Slf4j
+@Log
 public class ContactsUseCase {
 
     private final ContactsRepository contactsRepository;
@@ -34,10 +33,10 @@ public class ContactsUseCase {
         } else contacts.setUserId(userId);
         try {
             contactsRepository.save(contacts);
-            guardarContactosUsuario(userId);
+            //guardarContactosUsuario(userId);
             return true;
         } catch (Exception  e) {
-            log.error("Error en la creación: " + e.getMessage());
+            log.severe("Error en la creación: " + e.getMessage());
             return false;
         }
     }
@@ -50,10 +49,10 @@ public class ContactsUseCase {
         if (contacts.getCellPhone() != null) c.setCellPhone(contacts.getCellPhone());
         try {
             contactsRepository.save(c);
-            guardarContactosUsuario(userId);
+            //guardarContactosUsuario(userId);
             return true;
         } catch (Exception e) {
-            log.error("Error en la edición: " + e.getMessage());
+            log.severe("Error en la edición: " + e.getMessage());
             return false;
         }
     }
@@ -61,25 +60,28 @@ public class ContactsUseCase {
     public Boolean delete(String userId, String email, String cellPhone) {
         try {
             contactsRepository.deleteByUserIdAndEmailAndCellPhone(userId, email, cellPhone);
-            guardarContactosUsuario(userId);
+            //guardarContactosUsuario(userId);
             return true;
         } catch (Exception e) {
-            log.error("Error en eliminar contacto: " + e.getMessage());
+            log.severe("Error en eliminar contacto: " + e.getMessage());
             return false;
         }
     }
 
+
     public String getUserById(String username) {
-        return usersRepository.findByUsername(username).getId();
+        //return usersRepository.findByUsername(username).getId();
+        return "ok";
     }
 
     public String getUsername(String userId) {
-        AtomicReference<String> username = new AtomicReference<>("");
+        /*AtomicReference<String> username = new AtomicReference<>("");
         Optional<Users> users = usersRepository.findById(userId);
         users.ifPresent(x -> {
             username.set(x.getUsername());
         });
-        return username.get();
+        return username.get();*/
+        return "ok";
     }
 
     public List<Contacts> listContacts(String userId) {
@@ -87,10 +89,10 @@ public class ContactsUseCase {
     }
 
     private void guardarContactosUsuario(String userId) {
-        String username = getUsername(userId);
+        /*String username = getUsername(userId);
         Users u = usersRepository.findByUsername(username);
         u.setContacts(contactsRepository.findByUserId(userId));
-        usersRepository.save(u);
+        usersRepository.save(u);*/
     }
 
 }

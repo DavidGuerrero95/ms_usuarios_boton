@@ -24,4 +24,5 @@ public interface ContactsRepository {
 
     void deleteByUserIdAndEmailAndCellPhone(String userId, String email, String cellPhone);
 
+    Contacts save(Contacts contacts);
 }

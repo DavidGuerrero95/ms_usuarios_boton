@@ -18,10 +18,7 @@ subprojects {
     }
     dependencies {
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        implementation 'org.apache.logging.log4j:log4j-core:2.19.0'
-        implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.0'
-        implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.14'
-        implementation 'org.apache.commons:commons-lang3:3.12.0'
+        //implementation 'org.apache.commons:commons-lang3:3.12.0'
         compileOnly "org.projectlombok:lombok:${lombokVersion}"
         annotationProcessor  "org.projectlombok:lombok:${lombokVersion}"
         testCompileOnly  "org.projectlombok:lombok:${lombokVersion}"

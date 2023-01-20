@@ -1,0 +1,6 @@
+dependencies {
+    implementation project(':model')
+    implementation project(':mongo-repository')
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
+}

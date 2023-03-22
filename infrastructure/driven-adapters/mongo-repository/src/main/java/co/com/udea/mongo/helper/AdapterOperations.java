@@ -67,4 +67,8 @@ public abstract class AdapterOperations<E, D, I, R extends MongoRepository<D, I>
     public List<E> findAll() {
         return toList(repository.findAll());
     }
+
+    public Boolean existsById(I id) {return repository.existsById(id);}
+
+    public void deleteById(I id) {repository.deleteById(id);}
 }

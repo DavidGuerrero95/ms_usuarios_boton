@@ -11,21 +11,6 @@ public interface ContactsDataRepository
 
     List<ContactsData> findByUserId(String userId);
 
-    ContactsData findByUserIdAndEmailAndCellPhone(String userId, String email, String cellPhone);
-
-    ContactsData findByUserIdAndEmail(String userId,
-                                      String email);
-
-    ContactsData findByUserIdAndCellPhone(String userId, String cellPhone);
-
-    Boolean existsByUserIdAndEmail(String userId, String email);
-
     Boolean existsByUserIdAndCellPhone(String userId, String cellPhone);
-
-    Boolean existsByUserIdAndEmailAndCellPhone(String userId, String email, String cellPhone);
-
-    void deleteByUserId(String userId);
-
-    void deleteByUserIdAndEmailAndCellPhone(String userId, String email, String cellPhone);
 
 }

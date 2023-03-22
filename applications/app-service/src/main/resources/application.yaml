@@ -1,5 +1,8 @@
 server:
-  port: 8080
+  port: ${PORT:0}
+  error:
+    include-message: always
+    include-binding-errors: always
 spring:
   application:
     name: "ms_usuarios_boton"
@@ -13,7 +16,24 @@ spring:
     active: "local"
   data:
     mongodb:
-      uri: "mongodb://localhost:27017/test"
+      uri: "mongodb://aforo255:Aforo255#2019@localhost:27018/db_users_button?authSource=admin"
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: true
+  kafka:
+    producer:
+      bootstrap-servers: broker:9092
+      key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    template:
+      default-topic: transaction-topic
+    admin:
+      properties:
+        bootstrap:
+          servers: broker:9092
+
 management:
   endpoints:
     web:

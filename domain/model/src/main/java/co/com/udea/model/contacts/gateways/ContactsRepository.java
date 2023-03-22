@@ -8,20 +8,13 @@ public interface ContactsRepository {
 
     List<Contacts> findByUserId(String userId);
 
-    Contacts findByUserIdAndEmailAndCellPhone(String userId, String email, String cellPhone);
-
-    Contacts findByUserIdAndEmail(String userId, String email);
-
-    Contacts findByUserIdAndCellPhone(String userId, String cellPhone);
-
-    Boolean existsByUserIdAndEmail(String userId, String email);
-
     Boolean existsByUserIdAndCellPhone(String userId, String cellPhone);
 
-    Boolean existsByUserIdAndEmailAndCellPhone(String userId, String email, String cellPhone);
+    Contacts save(Contacts contacts);
 
-    void deleteByUserId(String userId);
+    Boolean existsById(String id);
 
-    void deleteByUserIdAndEmailAndCellPhone(String userId, String email, String cellPhone);
+    Contacts findById(String id);
 
+    void deleteById(String id);
 }

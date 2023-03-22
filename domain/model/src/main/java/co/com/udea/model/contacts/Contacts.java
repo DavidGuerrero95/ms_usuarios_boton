@@ -14,17 +14,17 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class Contacts {
 
-    @JsonIgnore
     private String id;
 
-    @Size(max = 20)
     @JsonIgnore
     private String userId;
 
-    @Pattern(regexp = "[A-Za-z ]+", message = "Solo letras")
-    private String name;
+    @Pattern(regexp = "[A-Za-z ]+", message = "firstName solo permite A-Z,a-z y ' '.")
+    @Size(max = 36, message = "El primer nombre debe tener entre 0 y 36 caracteres")
+    private String firstName;
 
     @Pattern(regexp = "[A-Za-z ]+", message = "Solo letras")
+    @Size(max = 36, message = "El apellido debe tener entre 0 y 36 caracteres")
     private String lastName;
 
     @NotNull(message = "Email no puede ser nulo")

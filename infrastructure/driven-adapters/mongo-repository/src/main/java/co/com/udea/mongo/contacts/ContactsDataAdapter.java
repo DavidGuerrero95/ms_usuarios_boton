@@ -26,45 +26,7 @@ public class ContactsDataAdapter
     }
 
     @Override
-    public Contacts findByUserIdAndEmailAndCellPhone(String userId, String email, String cellPhone) {
-        ContactsData byUser = repository.findByUserIdAndEmailAndCellPhone(userId,email, cellPhone);
-        return toEntity(byUser);
-    }
-
-    @Override
-    public Contacts findByUserIdAndEmail(String userId, String email) {
-        ContactsData byUser = repository.findByUserIdAndEmail(userId, email);
-        return toEntity(byUser);
-    }
-
-    @Override
-    public Contacts findByUserIdAndCellPhone(String userId, String cellPhone) {
-        ContactsData byUser = repository.findByUserIdAndCellPhone(userId,cellPhone);
-        return toEntity(byUser);
-    }
-
-    @Override
-    public Boolean existsByUserIdAndEmail(String userId, String email) {
-        return repository.existsByUserIdAndEmail(userId, email);
-    }
-
-    @Override
     public Boolean existsByUserIdAndCellPhone(String userId, String cellPhone) {
         return repository.existsByUserIdAndCellPhone(userId, cellPhone);
-    }
-
-    @Override
-    public Boolean existsByUserIdAndEmailAndCellPhone(String userId, String email, String cellPhone) {
-        return repository.existsByUserIdAndEmailAndCellPhone(userId, email, cellPhone);
-    }
-
-    @Override
-    public void deleteByUserId(String userId) {
-        repository.deleteByUserId(userId);
-    }
-
-    @Override
-    public void deleteByUserIdAndEmailAndCellPhone(String userId, String email, String cellPhone) {
-        repository.deleteByUserIdAndEmailAndCellPhone(userId, email, cellPhone);
     }
 }

@@ -1,10 +1,8 @@
 package co.com.udea.model.common.exceptions;
 
-import lombok.Builder;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-@Builder(toBuilder = true)
 public class ResponseException extends ResponseStatusException {
 
     private static final long serialVersionUID = 1L;

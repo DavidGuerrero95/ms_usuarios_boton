@@ -1,7 +1,7 @@
-FROM adoptopenjdk/openjdk11-openj9:alpine-slim
+FROM openjdk:11-jdk-slim
 VOLUME /tmp
 COPY *.jar ms_usuarios_boton.jar
 ENV JAVA_OPTS=" -Xshareclasses:name=cacheapp,cacheDir=/cache,nonfatal -XX:+UseContainerSupport -XX:MaxRAMPercentage=70 -Djava.security.egd=file:/dev/./urandom"
 # Replace with a non-root user to avoid running the container with excessive privileges
-WORKDIR /userapp
+USER appuser
 ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS  -jar ms_usuarios_boton.jar" ]

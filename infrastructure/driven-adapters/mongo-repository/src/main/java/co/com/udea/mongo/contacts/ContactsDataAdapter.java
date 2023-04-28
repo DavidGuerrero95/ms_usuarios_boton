@@ -8,6 +8,7 @@ import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -28,5 +29,19 @@ public class ContactsDataAdapter
     @Override
     public Boolean existsByUserIdAndCellPhone(String userId, String cellPhone) {
         return repository.existsByUserIdAndCellPhone(userId, cellPhone);
+    }
+
+    @Override
+    public Optional<Contacts> findByIdOptional(String id) {
+        return repository.findById(id).map(contactsData -> {
+            Contacts contacts = new Contacts();
+            contacts.setId(contactsData.getId());
+            contacts.setUserId(contactsData.getUserId());
+            contacts.setFirstName(contactsData.getFirstName());
+            contacts.setLastName(contactsData.getLastName());
+            contacts.setEmail(contactsData.getEmail());
+            contacts.setCellPhone(contacts.getCellPhone());
+            return contacts;
+        });
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -58,5 +59,45 @@ public class UsersDataAdapter
     @Override
     public boolean existsByCellPhone(String cellPhone) {
         return repository.existsByCellPhone(cellPhone);
+    }
+
+    @Override
+    public Optional<Users> findByIdOptional(String id) {
+
+        return repository.findById(id).map(usersData -> {
+            Users users = new Users();
+            users.setId(usersData.getId());
+            users.setUsername(usersData.getUsername());
+            users.setPassword(usersData.getPassword());
+            users.setEmail(usersData.getEmail());
+            users.setCellPhone(usersData.getCellPhone());
+            users.setRoles(usersData.getRoles());
+            users.setAttempts(usersData.getAttempts());
+            users.setActiveRole(usersData.getActiveRole());
+            users.setVerificationCode(usersData.getVerificationCode());
+            users.setAccountEnabled(usersData.getAccountEnabled());
+            users.setFirstName(usersData.getFirstName());
+            users.setLastName(usersData.getLastName());
+            users.setDocType(usersData.getDocType());
+            users.setDocumentId(usersData.getDocumentId());
+            users.setBirthDate(usersData.getBirthDate());
+            users.setGender(usersData.getGender());
+            users.setAddress(usersData.getAddress());
+            users.setGeoAddress(usersData.getGeoAddress());
+            users.setDepartment(usersData.getDepartment());
+            users.setCity(usersData.getCity());
+            users.setCountry(usersData.getCountry());
+            users.setNeighborhood(usersData.getNeighborhood());
+            users.setZipCode(usersData.getZipCode());
+            users.setLandLine(usersData.getLandLine());
+            users.setEconomicActivity(usersData.getEconomicActivity());
+            users.setEconomicData(usersData.getEconomicData());
+            users.setInterest(usersData.getInterest());
+            users.setFamilyHead(usersData.getFamilyHead());
+            users.setRegistrationDate(usersData.getRegistrationDate());
+            users.setFirstSeason(usersData.getFirstSeason());
+            users.setColour(usersData.getColour());
+            return users;
+        });
     }
 }

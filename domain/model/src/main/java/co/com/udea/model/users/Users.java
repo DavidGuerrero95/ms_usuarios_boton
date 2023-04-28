@@ -1,9 +1,8 @@
 package co.com.udea.model.users;
 
-import co.com.udea.model.common.AppIds;
-import co.com.udea.model.common.DocType;
-import co.com.udea.model.common.GenderType;
-import co.com.udea.model.common.RoleIds;
+import co.com.udea.model.common.*;
+import co.com.udea.model.common.annotations.EnumValue;
+import co.com.udea.model.common.annotations.MapEnumValue;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,12 +22,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Users {
-
     private String id;
     @Pattern(regexp = "[A-Za-z0-9_.-]+", message = "Solo se permite:'_' o '.' o '-'")
     @Size(min = 4, max = 20, message = "El username debe tener entre 4 y 20 caracteres")
     private String username;
-
     @NotBlank(message = "Password no puede ser nulo")
     @Pattern(regexp = "[A-Za-z0-9@_.&$-]+", message = "Solo se permiten letras, numeros y los caracteres especiales" +
             "@_.-&$")
@@ -42,39 +39,44 @@ public class Users {
     @Size(min = 9, max = 15, message = "El celular debe tener entre 9 y 15 caracteres")
     private String cellPhone;
     @JsonIgnore
+    @EnumValue(enumClass = RoleIds.class)
     private List<RoleIds> roles;
     @JsonIgnore
     private Integer attempts;
     @JsonIgnore
+    @MapEnumValue(keyClass = AppIds.class, valueClass = RoleIds.class)
     private HashMap<AppIds, RoleIds> activeRole;
     @JsonIgnore
     private Integer verificationCode;
     @JsonIgnore
     private Boolean accountEnabled;
     @Pattern(regexp = "[A-Za-z ]+", message = "Solo letras")
-    @Size(max = 36, message = "El primer nombre debe tener entre 0 y 36 caracteres")
+    @Size(max = 36, message = "El nombre debe tener entre 0 y 36 caracteres")
     private String firstName;
-
-    @Pattern(regexp = "[A-Za-z]+", message = "Solo letras")
-    @Size(max = 36, message = "El primer nombre debe tener entre 0 y 36 caracteres")
+    @Pattern(regexp = "[A-Za-z ]+", message = "Solo letras")
+    @Size(max = 36, message = "El apellido debe tener entre 0 y 36 caracteres")
     private String lastName;
+    @EnumValue(enumClass = DocType.class)
     private DocType docType;
     private String documentId;
     private LocalDateTime birthDate;
+    @EnumValue(enumClass = GenderType.class)
     private GenderType gender;
     private String address;
     private List<String> geoAddress;
-    private String department;
-    private String city;
-    private String country;
-    private String neighborhood;
+    private Integer city;
+    private Integer department;
+    private Integer country;
+    private Integer commune;
+    private Integer neighborhood;
+    private Integer transportMeans;
     private String zipCode;
     private String landLine;
-    private String economicActivity;
-    private List<String> economicData;
-    private List<String> interest;
+    private Integer economicActivity;
+    private List<Integer> economicData;
+    private List<Integer> interest;
     private Boolean familyHead;
     private LocalDateTime registrationDate;
     private Boolean firstSeason;
-    private String colour;
+    private Integer colour;
 }

@@ -3,6 +3,7 @@ package co.com.udea.api;
 import co.com.udea.model.common.RequestPageable;
 import co.com.udea.model.common.ResponseData;
 import co.com.udea.model.users.Users;
+import co.com.udea.requests.RequestRegister;
 import co.com.udea.usecase.UsersUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -12,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -66,6 +69,16 @@ public class UsersRest {
     @ResponseStatus(code = HttpStatus.OK)
     public ResponseData createFirstUser() {
         return useCase.createFirstUser();
+    }
+
+    @PostMapping(path = "/register", produces = "application/json;charser=UTF-8")
+    @Operation(summary = "registrar usuario", description = "Servicio para registrar usuarios")
+    @ApiResponses(value = {@ApiResponse(responseCode = "201",
+            description = "Registrar usuario"),
+            @ApiResponse(responseCode = "204", description = "No se pudo crear la informaci\u00f3n")})
+    @ResponseStatus(code = HttpStatus.OK)
+    public ResponseData registerUser(@Valid @RequestBody RequestRegister register) {
+        return useCase.register(register);
     }
 
 }

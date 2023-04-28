@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 public class DateMethods {
 
-    public boolean verifyDate(String date) {
+    public static boolean verifyDate(String date) {
         try {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             df.setLenient(false);
@@ -19,7 +19,7 @@ public class DateMethods {
         }
     }
 
-    public LocalDateTime convert(String date) {
+    public static LocalDateTime convert(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDateTime.parse(date, formatter);
     }

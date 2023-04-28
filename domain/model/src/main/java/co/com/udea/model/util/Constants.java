@@ -33,4 +33,15 @@ public class Constants  {
     public static final String ORGANIZACION_ERROR_EDICION = "Error en editar la organización";
     public static final String ORGANIZACION_ERROR_LISTAR = "Error al listar las organizaciones";
     public static final String ORGANIZACION_ELIMINAR = "Organización listada correctamente";
+
+    // CONTACTOS
+    public static final String CONTACTO_CREADO = "Creado Creado correctamente";
+
+    public static final String CONTACTO_USER_ID_NULL = "El id del usuario es null";
+
+    // USUARIOS
+    public static final String USUARIO_ELIMINAR = "El usuario fue eliminado correctamente";
+    // REGISTRO
+    public static final String REGISTRO_MENSAJE_ERROR = "El mensaje de registro fallo.";
+    public static final String USUARIO_CREADO_ERROR = "El usuario registrado fallo.";
 }

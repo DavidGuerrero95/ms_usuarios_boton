@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:0}
+  port: ${PORT}
   error:
     include-message: always
     include-binding-errors: always
@@ -16,7 +16,8 @@ spring:
     active: "local"
   data:
     mongodb:
-      uri: "mongodb://aforo255:Aforo255#2019@localhost:27018/db_users_button?authSource=admin"
+      uri: ${DB_URL}
+      auto-index-creation: true
   jackson:
     serialization:
       write-dates-as-timestamps: false

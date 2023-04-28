@@ -3,6 +3,7 @@ package co.com.udea.utils;
 import co.com.udea.model.common.ResponseData;
 import co.com.udea.model.common.exceptions.ServiceException;
 import co.com.udea.model.util.Constants;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -53,4 +54,10 @@ public class ResponseMethods {
         log.error(message + Constants.PUNTOS + e.getMessage() + Constants.LOCALIZACION + e.getLocalizedMessage());
         return getErrorResponseData(httpStatus, message);
     }
+
+    public static ResponseData getErrorResponseData(JsonProcessingException e, HttpStatus httpStatus, String message) {
+        log.error(message + Constants.PUNTOS + e.getMessage() + Constants.LOCALIZACION + e.getLocalizedMessage());
+        return getErrorResponseData(httpStatus, message);
+    }
+
 }

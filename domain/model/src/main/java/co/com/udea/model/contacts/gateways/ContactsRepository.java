@@ -3,6 +3,7 @@ package co.com.udea.model.contacts.gateways;
 import co.com.udea.model.contacts.Contacts;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ContactsRepository {
 
@@ -17,4 +18,6 @@ public interface ContactsRepository {
     Contacts findById(String id);
 
     void deleteById(String id);
+
+    Optional<Contacts> findByIdOptional(String id);
 }

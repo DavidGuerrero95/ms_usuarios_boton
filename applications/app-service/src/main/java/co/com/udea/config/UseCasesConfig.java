@@ -1,5 +1,6 @@
 package co.com.udea.config;
 
+import co.com.udea.kafkaclient.adapter.KafkaEventAdapter;
 import co.com.udea.mongo.contacts.ContactsDataAdapter;
 import co.com.udea.mongo.organizations.OrganizationsDataAdapter;
 import co.com.udea.mongo.register.RegisterDataAdapter;
@@ -15,8 +16,8 @@ import org.springframework.context.annotation.Configuration;
 public class UseCasesConfig {
 
     @Bean
-    public ContactsUseCase createContactsUseCase(ContactsDataAdapter dataAdapter) {
-        return new ContactsUseCase(dataAdapter);
+    public ContactsUseCase createContactsUseCase(ContactsDataAdapter dataAdapter, UsersDataAdapter usersDataAdapter) {
+        return new ContactsUseCase(dataAdapter, usersDataAdapter);
     }
 
     @Bean
@@ -24,8 +25,8 @@ public class UseCasesConfig {
         return new UsersUseCase(dataAdapter);
     }
     @Bean
-    public RegisterUseCase createRegisterUseCase(RegisterDataAdapter dataAdapter) {
-        return new RegisterUseCase(dataAdapter);
+    public RegisterUseCase createRegisterUseCase(RegisterDataAdapter dataAdapter, KafkaEventAdapter kafkaEventAdapter) {
+        return new RegisterUseCase(dataAdapter, kafkaEventAdapter);
     }
     @Bean
     public OrganizationsUseCase createOrganizationsUseCase(OrganizationsDataAdapter dataAdapter) {

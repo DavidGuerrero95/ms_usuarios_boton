@@ -6,7 +6,7 @@ public enum GenderType implements Serializable {
 
     GENDER_MALE ("male"),
     GENDER_FEMALE ("female"),
-    GENDER_BISEXUAL ("bisexual"),
+    NO_BINARY ("no binary"),
     GENDER_OTHER ("other");
 
     private String value;

@@ -1,6 +1,11 @@
 package co.com.udea.model.organizationalunits;
 
+import co.com.udea.model.common.AppIds;
+import co.com.udea.model.common.OrgType;
 import co.com.udea.model.common.RoleIds;
+import co.com.udea.model.common.annotations.EnumValue;
+import co.com.udea.model.common.annotations.MapEnumValue;
+import co.com.udea.model.common.annotations.ValidRoleIds;
 import co.com.udea.model.geographicalzones.GeographicalZones;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +27,7 @@ public class OrganizationalUnits {
     @Size(max=200, message = "descripción no puede tener mas de 200 letras")
     private String description;
     private String adminUserId;
+    @ValidRoleIds
     private List<HashMap<String, RoleIds>> personnel;
     private List<GeographicalZones> listGeoZoneId;
 }

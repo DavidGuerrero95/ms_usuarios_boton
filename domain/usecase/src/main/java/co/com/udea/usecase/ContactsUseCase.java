@@ -5,50 +5,46 @@ import co.com.udea.model.common.exceptions.ResponseException;
 import co.com.udea.model.contacts.Contacts;
 import co.com.udea.model.contacts.gateways.ContactsRepository;
 import co.com.udea.model.users.gateways.UsersRepository;
+import co.com.udea.model.util.Constants;
+import co.com.udea.utils.ResponseMethods;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.NonTransientDataAccessException;
 import org.springframework.dao.TransientDataAccessException;
 import org.springframework.http.HttpStatus;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Slf4j
+@RequiredArgsConstructor
 public class ContactsUseCase {
 
     private final ContactsRepository repository;
-
-    public ContactsUseCase(ContactsRepository contactsRepository) {
-        this.repository = contactsRepository;
-    }
-
-    @Autowired
-    private UsersRepository usersRepository;
-
-    public ContactsUseCase(ContactsRepository repository, UsersRepository usersRepository) {
-        this.repository = repository;
-        this.usersRepository = usersRepository;
-    }
+    private final UsersRepository usersRepository;
 
     public ResponseData save(Contacts contacts) {
-        ResponseData responseData = new ResponseData(null, HttpStatus.CREATED.value(), null);
-        try {
-            if (usersRepository.existsById(contacts.getUserId())) {
-                if (contacts.getId() != null) {
-                    return update(contacts);
-                } else {
-                    responseData.setData(repository.save(contacts));
-                    responseData.setMessage("Contacto creado correctamente");
-                }
-            } else {
-                throw new ResponseException(HttpStatus.NOT_FOUND, "El user id no existe");
-            }
-        } catch (NonTransientDataAccessException | TransientDataAccessException e) {
-            log.error("Error al almacenar el contacto: " + e.getMessage());
-            throw new ResponseException(HttpStatus.INTERNAL_SERVER_ERROR, "error al almacenar el contacto.");
-        }
-        return responseData;
+        return Optional.ofNullable(contacts.getId())
+                .flatMap(repository::findByIdOptional)
+                .map(contactsEdit -> update(contactsEdit))
+                .orElseGet(() -> {
+                    if (contacts.getUserId() == null)
+                        throw new ResponseException(HttpStatus.NOT_FOUND, Constants.CONTACTO_USER_ID_NULL);
+                    else if (usersRepository.existsById(contacts.getUserId())) {
+                        return ResponseMethods.getSuccessResponseData(repository.save(contacts),
+                                HttpStatus.CREATED, Constants.CONTACTO_CREADO);
+                    } else
+                        throw new ResponseException(HttpStatus.NOT_FOUND, Constants.USUARIOS_ID_NO_EXISTE);
+                });
     }
+
+    /*public ResponseData update(Contacts contacts) {
+        try {
+            Optional<Contacts> optionalContacts = Optional.ofNullable(contacts.getId())
+                    .flatMap(repository::findByIdOptional);
+            Contacts contactsInitial = optionalContacts.orElseThrow(() ->  )
+        }
+    }*/
 
     public ResponseData update(Contacts contacts) {
         ResponseData responseData = new ResponseData(null, HttpStatus.OK.value(), null);

@@ -5,6 +5,7 @@ import co.com.udea.model.users.Users;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 public interface UsersRepository {
     Boolean existsById(String userId);
@@ -15,4 +16,6 @@ public interface UsersRepository {
     boolean existsByCellPhone(String cellPhone);
     Users save(Users initialUser);
     void deleteById(String id);
+
+    Optional<Users> findByIdOptional(String id);
 }
